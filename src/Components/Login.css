@@ -1,0 +1,13 @@
+input {
+    border: 2px solid blue;
+    background: #fff;
+    width: 200px;
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -moz-box-shadow: 1px 1px 1px #ccc;
+
+}
+
+label{
+    margin-right: 9%;
+}
