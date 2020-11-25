@@ -16,13 +16,13 @@ class UserTable extends Component{
 
     
     render(){
-let {data} = this.props.state.data;
+let {data} = this.props.state;
 
         return(
             <div>
                 <table>
                     <UserHeader />
-                    {data.map(emp => (<tr>
+                    {data && data.map(emp => (<tr>
                     <td>{emp.id}</td>
                     <td>{emp.employee_name}</td>
                     <td>{emp.employee_salary}</td>
@@ -46,17 +46,6 @@ const UserHeader = () => {
     </tr>)
 }
 
-const UserData = (props) => {
-        return (<tr>
-            <td>{props.userProfile.id}</td>
-            <td>{props.userProfile.employee_name}</td>
-            <td>{props.userProfile.employee_salary}</td>
-            <td>{props.userProfile.employee_age}</td>
-            <td>{props.userProfile.employee_image}</td>
-            <td><input type="checkbox" checked={props.userProfile.status} /></td>
-            {/* <td><button onClick = {()=>{props.onDeleteUser(props.userProfile._id)}}>Delete</button></td> */}
-        </tr>)
-    }
     
 
 const mapStateToProps = state => {return {state}}
