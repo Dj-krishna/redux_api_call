@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import {getAllUsers} from '../actions/userAction'
 import { connect } from 'react-redux';
+import './Login';
+import { UserHeader } from './UserHeader';
+import UserTableData from './UserTableData';
+import SearchBar from './SearchBar';
+
 
 class UserTable extends Component{
     constructor(props){
         super(props);
         this.state = {
-
+            searchInput: '',
+            searchHere: ''
         }
     }
 
@@ -14,39 +20,54 @@ class UserTable extends Component{
        this.props.getAllUsers();
     }
 
+    handleChange = searchText => {
     
-    render(){
-let {data} = this.props.state;
+        this.setState({
+            searchInput: searchText
+        });
+    }
 
+    onSearchHere = event => {
+        this.setState({ 
+        searchHere: event.target.value
+        })
+    }
+
+    render(){
+        debugger;
+        let data = this.props.state.fetchUsers[0];   
         return(
             <div>
-                <table>
+                <SearchBar onSearch={this.handleChange}/>
+                 <input className="search"
+                    type="text" 
+                    placeholder="Search here..."
+                    value={this.state.searchHere} 
+                    onChange={this.onSearchHere} />
+                    <br />
+
+             <div className="grid-container">
+            <table> 
+                <thead>                   
                     <UserHeader />
-                    {data && data.map(emp => (<tr>
-                    <td>{emp.id}</td>
-                    <td>{emp.employee_name}</td>
-                    <td>{emp.employee_salary}</td>
-                    <td>{emp.employee_age}</td>
-                    <td>{emp.profile_image}</td>
-                        </tr>))}
+                </thead>
+                <tbody>
+                    {data && data
+                    .filter((res) => (res.login.toLowerCase().indexOf(this.state.searchHere.toLowerCase()) > -1))
+                    .map(emp => {
+                                    return <UserTableData dt={emp} />
+                                }
+                        )
+                    }
+                </tbody>
                 </table>
+                
             </div>
+        </div>
         )
     }
 
 }
-
-const UserHeader = () => {
-    return (<tr>
-        <th>Id</th>
-        <th>Employee Name</th>
-        <th>Employee Salary</th>
-        <th>Employee Age</th>
-        <th>Profile Image</th>
-    </tr>)
-}
-
-    
 
 const mapStateToProps = state => {return {state}}
 export default connect(mapStateToProps, {getAllUsers}) (UserTable)
