@@ -1,4 +1,4 @@
-input {
+.login {
     border: 2px solid blue;
     background: #fff;
     width: 200px;
@@ -10,4 +10,32 @@ input {
 
 label{
     margin-right: 9%;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-rows: 150px auto 1000px;
+}
+
+.search{
+    border: 2px solid blue;
+    background: rgb(241, 203, 203);
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -moz-box-shadow: 1px 1px 1px rgb(236, 70, 70);
+    height: 20px; 
+}
+
+img{
+    width: 100px;
+}
+
+thead{
+    background-color: rgb(110, 141, 235);
+    border: red;
+    border-collapse: collapse;
+}
+
+tbody{
+    background: rgb(228, 172, 132);
 }
